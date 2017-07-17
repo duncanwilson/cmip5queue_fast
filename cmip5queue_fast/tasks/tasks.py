@@ -10,35 +10,27 @@ import shutil
 basedir="/data/static_web"
 
 @task()
-def check_user_storage_old(args):
-    """
-        Checks user storage space from previous tasks
-        args: user id
-        return in bytes
-    """
-    user_id = args['user_id']
-    resultDir = os.path.join(basedir, 'cmip5_tasks/', user_id)
-    user_space = get_size(start_path = resultDir)
-    return user_space
-
-@task()
-def check_task_storage(user_id,task_id):
+def check_task_storage(args):
     """
         Checks task storage space from a specific task
         args: user_id, task_id
         return size in bytes
     """
-    resultDir = os.path.join(basedir, 'cmip5_tasks/', user_id, task_id)
+    task_id = args['task_id']
+    user_id = args['user_id']
+    resultDir = os.path.join(basedir, 'cmip5_tasks/', user_id, task_id, 'output/')
     task_space = get_size(start_path = resultDir)
     return task_space
     
 @task()
-def check_user_storage(user_id):
+def check_user_storage(args):
     """
         Checks user storage space from previous tasks
         args: user_id
+        example {"user_id":"duncan"}
         return size in bytes
     """
+    user_id = args['user_id']
     resultDir = os.path.join(basedir, 'cmip5_tasks/', user_id)
     user_space = get_size(start_path = resultDir)
     return user_space    
