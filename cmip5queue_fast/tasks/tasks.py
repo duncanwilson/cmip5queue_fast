@@ -27,7 +27,7 @@ def check_task_storage(user_id,task_id):
         args: user_id, task_id
         return size in bytes
     """
-    resultDir = os.path.join(basedir, 'cmip5_tasks/', user_id, '/', task_id)
+    resultDir = os.path.join(basedir, 'cmip5_tasks/', user_id, task_id)
     task_space = get_size(start_path = resultDir)
     return task_space
     
