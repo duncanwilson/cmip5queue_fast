@@ -48,6 +48,7 @@ def delete_task_data(args):
     """
         Deletes user storage space from a specific task
         args: {user_id, task_id}
+        note: task_id is from a previously completed task
         returns space deleted in bytes
         example: {"user_id":"duncan", "task_id":"trialrun"}
         function deletes entire subfolder "/output" from a task folder
@@ -67,6 +68,7 @@ def create_tables(args):
               {user_id,
               final_query}
     """
+    task_id = str(create_tables.request.id)
     user_id = args['user_id']
     query = args['final_query']
     resultDir = setup_user_directory(user_id)
