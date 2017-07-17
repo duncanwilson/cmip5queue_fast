@@ -92,8 +92,3 @@ def setup_user_directory(user_id):
     os.chmod(resultDir,0777)
     return resultDir
 
-try:
-    os.makedirs(directory_name)
-except OSError as err:
-    if err.errno!=17:
-        raise
