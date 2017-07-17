@@ -1,4 +1,5 @@
 from celery.task import task
+from dockertask import docker_task
 from subprocess import call,STDOUT
 from shutil import copyfile, move
 import requests
@@ -63,7 +64,7 @@ def create_tables(args):
     """
         Runs R script to create html tables of the CMIP5 data selected
         args are in this order:
-              {user_name,
+              {user_id,
               final_query}
     """
     user_id = args['user_id']
