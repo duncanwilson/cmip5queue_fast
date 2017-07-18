@@ -62,10 +62,11 @@ def create_tables(args):
     """
     task_id = str(create_tables.request.id)
     user_id = args['user_id']
-    query = args['final_query']
     resultDir = setup_user_directory(user_id)
+    with open(resultDir + '/tables.json', "wt") as f:
+        jsonx.dump(args,f)
     docker_opts = "-v /data/cmip5_functions:/sccsc:ro -v /data/static_web/cmip5_tasks:/sccsc_out -w /sccsc"
-    docker_cmd ="Rscript /sccsc/cmip5_tables.R {0} {1}".format(user_id, query)
+    docker_cmd ="Rscript /sccsc/cmip5_tables.R {0}".format(user_id)
     result = docker_task(docker_name="sccsc/r",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)
     return result
     
