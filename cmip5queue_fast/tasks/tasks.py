@@ -40,13 +40,13 @@ def check_user_storage(args):
 def delete_task_data(args):    
     """
         Deletes user storage space from a specific task
-        args: {user_id, task_id}
-        note: task_id is from a previously completed task
+        args: {user_id, History_task_id}
+        note: history_task_id is from a previously completed task
         returns space deleted in bytes
         example: {"user_id":"duncan", "task_id":"trialrun"}
         function deletes entire subfolder "/output" from a task folder
     """
-    task_id = args['task_id']
+    task_id = args['history_task_id']
     user_id = args['user_id']
     taskDir = os.path.join(basedir, 'cmip5_tasks/', user_id, task_id, 'output/')
     deleted_size = get_size(start_path = taskDir)
@@ -57,7 +57,7 @@ def delete_task_data(args):
 def create_tables(args):
     """
         Runs R script to create html tables of the CMIP5 data selected
-        args are in this order:
+        args are:
               {user_id,
               final_query}
     """
