@@ -1,7 +1,6 @@
 from celery.task import task
 from dockertask import docker_task
-from subprocess import call,STDOUT
-from shutil import copyfile, move
+import subprocess
 import requests
 import os
 import shutil
@@ -57,6 +56,27 @@ def delete_task_data(args):
 def create_tables(args):
     """
         Runs R script to create html tables of the CMIP5 data selected
+        args are:
+              {user_id,
+              final_query}
+    """
+    user_id = args['user_id']
+    resultDir = setup_user_directory(user_id)
+    # write the args to disk. These contain shell characters '$' so passing as arguments doesn't work
+    with open(resultDir + '/tables.json', "wt") as f:
+        jsonx.dump(args,f)
+    command = 'Rscript'
+    path2script = '/data/cmip5_functions/cmip5_tables.R'
+    pass_args = [user_id]
+    cmd = [command, '--vanilla', path2script] + pass_args
+    subprocess.call(cmd)    
+    return
+    
+@task()
+def create_tables_old(args):
+    """
+        Runs R script to create html tables of the CMIP5 data selected
+        Uses Docker_task
         args are:
               {user_id,
               final_query}
