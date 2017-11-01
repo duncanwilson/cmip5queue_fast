@@ -75,12 +75,12 @@ def setup_user_directory(user_id):
     except OSError as err:
         if err.errno!=17:
             raise
+    os.chmod(resultDir,0777)        
     try:
         os.makedirs("{0}/tables".format(resultDir))
     except OSError as err:
         if err.errno!=17:
             raise
-    os.chmod(resultDir,0777)
     os.chmod("{0}/tables".format(resultDir),0777)
     return resultDir
 
