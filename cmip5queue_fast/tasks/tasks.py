@@ -58,7 +58,8 @@ def create_tables(args):
     cmd = [command, '--vanilla', path2script] + pass_args
     subprocess.call(cmd)    
     return
-    
+
+@task()    
 def get_size(start_path = '.'):
     total_size = 0
     for dirpath, dirnames, filenames in os.walk(start_path):
