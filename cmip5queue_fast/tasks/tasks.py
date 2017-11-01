@@ -50,7 +50,7 @@ def create_tables(args):
     user_id = args['user_id']
     resultDir = setup_user_directory(user_id)
     # write the args to disk. These contain shell characters '$' so passing as arguments doesn't work
-    with open(resultDir + '/tables.json', "wt") as f:
+    with open(resultDir + '/tables/tables.json', "wt") as f:
         jsonx.dump(args,f)
     command = 'Rscript'
     path2script = '/data/cmip5_functions/cmip5_tables.R'
