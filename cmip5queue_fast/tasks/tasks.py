@@ -72,6 +72,10 @@ def setup_user_directory(user_id):
     resultDir = os.path.join(basedir, 'cmip5_tasks/', user_id)
     try:
         os.makedirs(resultDir)
+    except OSError as err:
+        if err.errno!=17:
+            raise
+    try:
         os.makedirs("{0}/tables".format(resultDir))
     except OSError as err:
         if err.errno!=17:
